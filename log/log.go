@@ -1,16 +1,23 @@
-package customlog
+package log
 
 import (
 	"fmt"
 	"io"
 	"log"
+	"os"
 	"runtime"
+	"time"
 )
+
+func init() {
+	Rotate()
+}
 
 // LogLevel represents the log level.
 type LogLevel int
 
 var logLevel LogLevel = TRACE
+var logFile *os.File
 
 const (
 	TRACE LogLevel = iota
@@ -82,12 +89,27 @@ func Fatal(format string, v ...any) {
 	logMessage(FATAL, format, v...)
 }
 
+// SetLogLevel sets the log level.
+func SetLogLevel(level LogLevel) {
+	logLevel = level
+}
+
 // SetOutput sets the output destination for the logs.
 func SetOutput(w io.Writer) {
 	log.SetOutput(w)
 }
 
-// SetLogLevel sets the log level.
-func SetLogLevel(level LogLevel) {
-	logLevel = level
+var YYYY_MM_DD_HH_MM_SS = "2006-01-02 15:04:05"
+
+func Rotate() {
+	fname := time.Now().Format("output/" + YYYY_MM_DD_HH_MM_SS + ".log")
+	w, err := os.OpenFile(fname, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
+	if err != nil {
+		panic(err)
+	}
+
+	SetOutput(io.MultiWriter(os.Stdout, w))
+
+	logFile = w
+	Trace("Log rotated: %v", fname)
 }
