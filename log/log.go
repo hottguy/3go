@@ -99,7 +99,7 @@ func SetOutput(w io.Writer) {
 	log.SetOutput(w)
 }
 
-var YYYY_MM_DD_HH_MM_SS = "2006-01-02 15:04:05"
+var YYYY_MM_DD_HH_MM_SS = "2006-01-02 15.04.05"
 
 func Rotate() {
 	fname := time.Now().Format("output/" + YYYY_MM_DD_HH_MM_SS + ".log")
