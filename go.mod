@@ -1,3 +1,3 @@
-module 3go
+module github.com/hottguy/3go
 
-go 1.19
+go 1.20

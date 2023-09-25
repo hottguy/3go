@@ -1,10 +1,11 @@
 package main
 
 import (
-	"3go/app"
-	"3go/log"
 	"net/http"
 	"syscall"
+
+	"github.com/hottguy/3go/app"
+	"github.com/hottguy/3go/log"
 )
 
 func main() {
@@ -15,5 +16,5 @@ func main() {
 }
 
 func mux(w http.ResponseWriter, r *http.Request) {
-	log.Trace("%v", "asdfasdf")
+	log.Trace("%+v", r.URL)
 }
