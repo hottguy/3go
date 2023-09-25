@@ -1,0 +1,60 @@
+2023/09/26 05:05:05 [INFO] This is an info message main.go 19
+2023/09/26 05:05:05 [WARNING] This is a warning message main.go 20
+2023/09/26 05:05:05 [ERROR] This is an error message main.go 21
+2023/09/26 05:05:05 [FATAL] This is an 치명적인 error message main.go 22
+2023/09/26 05:05:17 [INFO] This is an info message main.go 19
+2023/09/26 05:05:17 [WARNING] This is a warning message main.go 20
+2023/09/26 05:05:17 [ERROR] This is an error message main.go 21
+2023/09/26 05:05:17 [FATAL] This is an 치명적인 error message main.go 22
+2023/09/26 05:07:26 [INFO] This is an info message main.go 20
+2023/09/26 05:07:26 [WARNING] This is a warning message main.go 21
+2023/09/26 05:07:26 [ERROR] This is an error message main.go 22
+2023/09/26 05:07:26 [FATAL] This is an 치명적인 error message main.go 23
+2023/09/26 05:07:27 [INFO] This is an info message main.go 20
+2023/09/26 05:07:27 [WARNING] This is a warning message main.go 21
+2023/09/26 05:07:27 [ERROR] This is an error message main.go 22
+2023/09/26 05:07:27 [FATAL] This is an 치명적인 error message main.go 23
+2023/09/26 05:07:28 [INFO] This is an info message main.go 20
+2023/09/26 05:07:28 [WARNING] This is a warning message main.go 21
+2023/09/26 05:07:28 [ERROR] This is an error message main.go 22
+2023/09/26 05:07:28 [FATAL] This is an 치명적인 error message main.go 23
+2023/09/26 05:07:29 [INFO] This is an info message main.go 20
+2023/09/26 05:07:29 [WARNING] This is a warning message main.go 21
+2023/09/26 05:07:29 [ERROR] This is an error message main.go 22
+2023/09/26 05:07:29 [FATAL] This is an 치명적인 error message main.go 23
+2023/09/26 05:07:30 [INFO] This is an info message main.go 20
+2023/09/26 05:07:30 [WARNING] This is a warning message main.go 21
+2023/09/26 05:07:30 [ERROR] This is an error message main.go 22
+2023/09/26 05:07:30 [FATAL] This is an 치명적인 error message main.go 23
+2023/09/26 05:07:31 [INFO] This is an info message main.go 20
+2023/09/26 05:07:31 [WARNING] This is a warning message main.go 21
+2023/09/26 05:07:31 [ERROR] This is an error message main.go 22
+2023/09/26 05:07:31 [FATAL] This is an 치명적인 error message main.go 23
+2023/09/26 05:07:32 [INFO] This is an info message main.go 20
+2023/09/26 05:07:32 [WARNING] This is a warning message main.go 21
+2023/09/26 05:07:32 [ERROR] This is an error message main.go 22
+2023/09/26 05:07:32 [FATAL] This is an 치명적인 error message main.go 23
+2023/09/26 05:07:33 [INFO] This is an info message main.go 20
+2023/09/26 05:07:33 [WARNING] This is a warning message main.go 21
+2023/09/26 05:07:33 [ERROR] This is an error message main.go 22
+2023/09/26 05:07:33 [FATAL] This is an 치명적인 error message main.go 23
+2023/09/26 05:07:34 [INFO] This is an info message main.go 20
+2023/09/26 05:07:34 [WARNING] This is a warning message main.go 21
+2023/09/26 05:07:34 [ERROR] This is an error message main.go 22
+2023/09/26 05:07:34 [FATAL] This is an 치명적인 error message main.go 23
+2023/09/26 05:07:35 [INFO] This is an info message main.go 20
+2023/09/26 05:07:35 [WARNING] This is a warning message main.go 21
+2023/09/26 05:07:35 [ERROR] This is an error message main.go 22
+2023/09/26 05:07:35 [FATAL] This is an 치명적인 error message main.go 23
+2023/09/26 05:07:36 [INFO] This is an info message main.go 20
+2023/09/26 05:07:36 [WARNING] This is a warning message main.go 21
+2023/09/26 05:07:36 [ERROR] This is an error message main.go 22
+2023/09/26 05:07:36 [FATAL] This is an 치명적인 error message main.go 23
+2023/09/26 05:07:37 [INFO] This is an info message main.go 20
+2023/09/26 05:07:37 [WARNING] This is a warning message main.go 21
+2023/09/26 05:07:37 [ERROR] This is an error message main.go 22
+2023/09/26 05:07:37 [FATAL] This is an 치명적인 error message main.go 23
+2023/09/26 05:07:38 [INFO] This is an info message main.go 20
+2023/09/26 05:07:38 [WARNING] This is a warning message main.go 21
+2023/09/26 05:07:38 [ERROR] This is an error message main.go 22
+2023/09/26 05:07:38 [FATAL] This is an 치명적인 error message main.go 23
