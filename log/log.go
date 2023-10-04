@@ -54,7 +54,7 @@ func logMessage(level LogLevel, format string, v ...any) {
 		}
 		file = short
 		log.Printf(
-			"[%s] %s %s %d", level, fmt.Sprintf(format, v...), file, line,
+			"[%s] %s (%s:%d)", level, fmt.Sprintf(format, v...), file, line,
 		)
 	}
 }

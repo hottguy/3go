@@ -179,24 +179,26 @@ func Wait() {
 		sig := <-ch
 
 		/*
-			수신한 모든 시그널을 기록으로 남김.
-			SIGURG(23), SIGWINCH(28) 는 너무 많이 발생하므로 로그 남기지 않음
-			SIGCHLD(17) butler.Info() 함수가 grep 명령을 사용할 때 발생 (무시)
+			if signal callback exits then call it.
 		*/
-		sig17 := sig == syscall.Signal(17)
-		sig23 := sig == syscall.Signal(23)
-		sig28 := sig == syscall.Signal(28)
-
 		f, ok := signalCallback[sig]
 		if ok {
 			f()
 		}
 
-		if !sig17 && !sig23 && !sig28 && !ok {
+		/*
+			SIGCHLD(17), SIGURG(23) and SIGWINCH(28) occur too often
+			so don't write log.
+			SIGCHLD signal can be received by 'ps -ef | grep xxx'
+		*/
+		sig17 := sig == syscall.Signal(17)
+		sig23 := sig == syscall.Signal(23)
+		sig28 := sig == syscall.Signal(28)
+		if !sig17 && !sig23 && !sig28 {
 			log.Printf("Signal: %s (%d)", sig.String(), sig)
 		}
 		/*
-			인터럽트시그널 혹은 종료시그널인 경우 종료
+			if sig is SIGINT or SIGTERM then terminate app.
 			SIGINT	2	Terminal interrupt (ANSI)
 			SIGTERM	15	Termination (ANSI)
 		*/

@@ -1,0 +1,15 @@
+<pre id="output"></pre>
+<script>
+    var pre = document.getElementById("output");
+    const eventSource = new EventSource('/events' + window.location.search);
+    eventSource.onmessage = function(event) {
+        console.log(event.data);
+        console.log(JSON.parse(event.data));
+        pre.textContent += event.data + "\n";
+    };
+    eventSource.onerror = function(event) {
+        console.error(event);
+        pre.textContent += JSON.stringify(event, null, 2) + "\n";
+        eventSource.close();
+    };
+</script>
