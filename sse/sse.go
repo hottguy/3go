@@ -4,8 +4,6 @@ import (
 	"fmt"
 	"net/http"
 	"sync"
-
-	"github.com/hottguy/3go/log"
 )
 
 var (
@@ -23,38 +21,29 @@ func Send(id, msg string) {
 	}
 }
 
+/*
+If this function return then sse connectoin will be closed.
+*/
 func Open(id string, w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "text/event-stream")
-	w.Header().Set("Cache-Control", "no-cache")
-	w.Header().Set("Connection", "keep-alive")
 
 	ch := make(chan string)
 	put(id, ch)
 
-	// 클라이언트 연결 종료 감지
-	go func() {
-		<-r.Context().Done()
-		//ch가 끝났음을 마크
-		log.Trace("클라이언트가 종료 %s, %+v", id, Clients)
-	}()
-
-	/*
-		무한루프를 돌며 채널에 메세지가 도착하면 HTTP 응답을 함.
-		즉, SSE 접속 1개당 1개의 고루틴이 계속 살아있는 것임.
-		이 Open 함수가 리턴한다는 것은 해당 SSE 채널이 닫힌 것임.
-	*/
 	for msg := range ch {
 		if err := r.Context().Err(); err != nil {
-			// 브라우저 연결이 끊어짐
-			fmt.Printf("Connection closed by client. %+v", err)
 			remove(id)
 			return
 		}
-		data := fmt.Sprintf("data: %s\n\n", msg)
-		fmt.Fprint(w, data)
-		w.(http.Flusher).Flush()
-		log.Trace("메세지 전송됨. %v", id)
+		SendEvent(w, msg)
 	}
+}
+
+func SendEvent(w http.ResponseWriter, msg string) {
+	w.Header().Set("Content-Type", "text/event-stream")
+	w.Header().Set("Cache-Control", "no-cache")
+	w.Header().Set("Connection", "keep-alive")
+	fmt.Fprintf(w, "data: %s\n\n", msg)
+	w.(http.Flusher).Flush()
 }
 
 /*
@@ -66,9 +55,9 @@ func put(id string, ch chan string) {
 	cmu.Lock()
 	defer cmu.Unlock()
 
-	c, ok := Clients[id]
+	oldch, ok := Clients[id]
 	if ok {
-		close(c)
+		close(oldch)
 	}
 	Clients[id] = ch
 }
@@ -80,9 +69,9 @@ func remove(id string) {
 	cmu.Lock()
 	defer cmu.Unlock()
 
-	c, ok := Clients[id]
+	oldch, ok := Clients[id]
 	if ok {
-		close(c)
+		close(oldch)
 		delete(Clients, id)
 	}
 }

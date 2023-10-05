@@ -1,0 +1,13 @@
+{
+    "LogDir":"logs",
+    "LogLevel":"TRACE",
+    "LogFileNamePattern":"2006-01-02 15.04.05",
+    
+    "MDB_Name":"3go",
+    "MDB_ConnectTimeout":3000,
+    "MDB_SocketTimeout":3000,
+    "MDB_ServerSelectionTimeout":3000,
+
+    "Http":":7500",
+    "WebRoot":"www"
+}

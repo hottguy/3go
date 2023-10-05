@@ -9,15 +9,8 @@ import (
 	"time"
 )
 
-func init() {
-	Rotate()
-}
-
 // LogLevel represents the log level.
 type LogLevel int
-
-var logLevel LogLevel = TRACE
-var logFile *os.File
 
 const (
 	TRACE LogLevel = iota
@@ -28,13 +21,30 @@ const (
 	FATAL
 )
 
-var logLevelStrings = []string{
-	"TRACE",
-	"DEBUG",
-	"INFO",
-	"WARNING",
-	"ERROR",
-	"FATAL",
+var (
+	logFile         *os.File
+	dir             string   = "logs"
+	pattern         string   = "2006-01-02 15.04.05"
+	logLevel        LogLevel = TRACE
+	logLevelStrings          = []string{
+		"TRACE",
+		"DEBUG",
+		"INFO",
+		"WARNING",
+		"ERROR",
+		"FATAL",
+	}
+)
+
+func Initialize(dirx, patternx, level string) {
+	dir = dirx
+	pattern = patternx
+	SetLogLevel(level)
+	err := os.MkdirAll(dir, os.ModePerm)
+	if err != nil {
+		panic(err)
+	}
+	Rotate()
 }
 
 func (level LogLevel) String() string {
@@ -90,25 +100,27 @@ func Fatal(format string, v ...any) {
 }
 
 // SetLogLevel sets the log level.
-func SetLogLevel(level LogLevel) {
-	logLevel = level
+func SetLogLevel(level string) {
+	for i, s := range logLevelStrings {
+		if s == level {
+			logLevel = LogLevel(i)
+			return
+		}
+	}
 }
 
-// SetOutput sets the output destination for the logs.
-func SetOutput(w io.Writer) {
-	log.SetOutput(w)
-}
-
-var YYYY_MM_DD_HH_MM_SS = "2006-01-02 15.04.05"
-
+/*
+log.SetOutput and writing functions are using same mutex so SetOutput is
+Thread safe.
+*/
 func Rotate() {
-	fname := time.Now().Format("output/" + YYYY_MM_DD_HH_MM_SS + ".log")
+	fname := time.Now().Format(dir + "/" + pattern + ".log")
 	w, err := os.OpenFile(fname, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
 	if err != nil {
 		panic(err)
 	}
 
-	SetOutput(io.MultiWriter(os.Stdout, w))
+	log.SetOutput(io.MultiWriter(os.Stdout, w))
 
 	logFile = w
 	Trace("Log rotated: %v", fname)
